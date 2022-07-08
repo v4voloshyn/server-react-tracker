@@ -14,7 +14,11 @@ import { useEffect } from 'react';
 import { useTimer } from '../../../hooks/useTimer';
 
 const ListItem = ({ id, name, idx, count, isPaused }) => {
-	const { isPause, time, start, stop } = useTimer({ name, count, isPaused });
+	const { isPause, time, start, stop } = useTimer({
+		timerName: name,
+		count,
+		isPaused,
+	});
 
 	const dispatch = useDispatch();
 
@@ -24,7 +28,6 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 		dispatch(
 			updateTrackAsync({
 				id,
-				// name: 'Updated 2!',
 				count: time,
 				isPaused: !isPause,
 				startedAt: Date.now(),
@@ -34,6 +37,7 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 
 	useEffect(() => {
 		if (!isPause) start();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
