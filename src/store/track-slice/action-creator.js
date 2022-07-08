@@ -1,4 +1,8 @@
-import { addTrack, removeTrack } from './track-slice';
+import {
+	addTrackLocal,
+	removeTrackLocal,
+	updateTrackLocal,
+} from './track-slice';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -44,7 +48,7 @@ export const addTrackAsync = createAsyncThunk(
 
 			const data = await response.json();
 			console.log(data);
-			dispatch(addTrack(data));
+			dispatch(addTrackLocal(data));
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -66,7 +70,7 @@ export const removeTrackAsync = createAsyncThunk(
 				throw new Error('Something went wrong when fetching tracks');
 			}
 
-			dispatch(removeTrack(id));
+			dispatch(removeTrackLocal(id));
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -75,7 +79,17 @@ export const removeTrackAsync = createAsyncThunk(
 
 export const updateTrackAsync = createAsyncThunk(
 	'trackSlice/update',
-	async (newBody, { dispatch }) => {
+	async (newBody, { dispatch, getState }) => {
+		const itemState = getState().track.tracks.find(
+			(track) => track.id === newBody.id
+		);
+		console.log(newBody.count);
+		if (
+			itemState.count === newBody.count &&
+			itemState.isPaused === newBody.isPaused
+		)
+			return;
+
 		const { id, ...rest } = newBody;
 		try {
 			const response = await fetch(
@@ -94,8 +108,7 @@ export const updateTrackAsync = createAsyncThunk(
 			}
 
 			const data = await response.json();
-			console.log(data);
-			dispatch(addTrack(data));
+			dispatch(updateTrackLocal(data));
 		} catch (error) {
 			console.log(error.message);
 		}

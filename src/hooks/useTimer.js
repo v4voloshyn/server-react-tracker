@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useTimer = (timerName, count = 0, isPaused = true) => {
+export const useTimer = ({ timerName, count = 0, isPaused = true }) => {
 	const [time, setTime] = useState(count);
 	const [isPause, setPause] = useState(isPaused);
 
@@ -18,13 +18,13 @@ export const useTimer = (timerName, count = 0, isPaused = true) => {
 		clearInterval(timeRef.current);
 	};
 
-	// useEffect(() => {
-	// 	localStorage.setItem('timerName', timerName);
-	// }, [time, timerName]);
-
 	useEffect(() => {
 		return () => clearInterval(timeRef.current);
 	}, []);
+
+	useEffect(() => {
+		localStorage.setItem(timerName, time);
+	}, [time, timerName]);
 
 	return {
 		time,

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const TrackerList = () => {
 	const trackList = useSelector((state) => state.track.tracks);
-	console.log(trackList);
+	// console.log(trackList);
 
 	return (
 		<Table>
@@ -19,7 +19,7 @@ const TrackerList = () => {
 				<TRow style={{ backgroundColor: 'lightblue' }}>
 					<th></th>
 					<th>Track name</th>
-					<th>Counting</th>
+					<th>Time</th>
 					<th></th>
 				</TRow>
 			</thead>

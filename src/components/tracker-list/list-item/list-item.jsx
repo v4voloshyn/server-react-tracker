@@ -14,42 +14,26 @@ import { useEffect } from 'react';
 import { useTimer } from '../../../hooks/useTimer';
 
 const ListItem = ({ id, name, idx, count, isPaused }) => {
-	const { isPause, time, start, stop } = useTimer(name, count, isPaused);
+	const { isPause, time, start, stop } = useTimer({ name, count, isPaused });
 
 	const dispatch = useDispatch();
 
 	const toggleTrack = () => {
 		isPause ? start() : stop();
-	};
 
-	const updateOnPageLeave = () => {
-		const newBody = {
-			id,
-			count: 22,
-			isPaused: isPause,
-			startedAt: Date.now(),
-		};
-		dispatch(updateTrackAsync(newBody));
+		dispatch(
+			updateTrackAsync({
+				id,
+				// name: 'Updated 2!',
+				count: time,
+				isPaused: !isPause,
+				startedAt: Date.now(),
+			})
+		);
 	};
-	const alertUser = () => alert('Data may not save!');
 
 	useEffect(() => {
 		if (!isPause) start();
-
-		// window.addEventListener('beforeunload', (event) => {
-		// 	updateOnPageLeave();
-		// 	event.returnValue = '';
-		// });
-
-		window.addEventListener('unload', (e) => {
-			e.preventDefault();
-			updateOnPageLeave();
-		});
-
-		return () => {
-			// window.removeEventListener('beforeunload', alertUser);
-			window.removeEventListener('unload', updateOnPageLeave);
-		};
 	}, []);
 
 	return (
