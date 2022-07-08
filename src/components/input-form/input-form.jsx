@@ -1,5 +1,7 @@
-import { Input, InputWrapper, PlayIcon, Title } from './input-form.style';
+import { Input, InputWrapper, Title } from './input-form.style';
 
+import Button from '../UI/Button/Button';
+import { MdPlayCircle } from 'react-icons/md';
 import { addTrackAsync } from '../../store/track-slice/action-creator';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
@@ -7,6 +9,8 @@ import { useState } from 'react';
 
 const InputForm = () => {
 	const [trackName, setTrackName] = useState('');
+	const [addStatus, setAddStatus] = useState(false);
+
 	const dispatch = useDispatch();
 
 	const handleInput = (e) => {
@@ -14,15 +18,21 @@ const InputForm = () => {
 	};
 
 	const handleAddTrack = () => {
-		const newTrack = {
-			id: nanoid(),
-			name: trackName || `${Date.now()}`,
-			startedAt: Date.now(),
-			isPaused: false,
-			count: 0,
-		};
+		setAddStatus(true);
+		new Promise((resolve) => {
+			const newTrack = {
+				id: nanoid(),
+				name: trackName || `${Date.now()}`,
+				startedAt: Date.now(),
+				isPaused: false,
+				count: 0,
+			};
+			resolve(dispatch(addTrackAsync(newTrack)));
+		})
+			.then(() => setAddStatus(false))
+			.catch(console.log('Promise Error'));
 
-		dispatch(addTrackAsync(newTrack));
+		setTrackName('');
 	};
 
 	return (
@@ -35,7 +45,9 @@ const InputForm = () => {
 					value={trackName}
 					onChange={handleInput}
 				/>
-				<PlayIcon size={'3.25rem'} onClick={handleAddTrack} />
+				<Button disabled={addStatus} onClick={handleAddTrack}>
+					<MdPlayCircle />
+				</Button>
 			</InputWrapper>
 		</>
 	);
