@@ -12,7 +12,7 @@ const trackSlice = createSlice({
 	initialState: defaultState,
 	reducers: {
 		addTrackLocal(state, action) {
-			state.tracks.push(action.payload);
+			state.tracks = [action.payload, ...state.tracks];
 		},
 		removeTrackLocal(state, action) {
 			state.tracks = state.tracks.filter(
@@ -28,16 +28,25 @@ const trackSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) =>
-		builder.addCase(fetchTracksAsync.fulfilled, (state, action) => {
-			state.tracks = action.payload.map((track) => {
-				if (track.isPaused) return track;
-				return {
-					...track,
-					count:
-						Math.round((Date.now() - track.startedAt) / 1000) + track.count,
-				};
-			});
-		}),
+		builder
+			.addCase(fetchTracksAsync.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(fetchTracksAsync.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.tracks = action.payload.map((track) => {
+					if (track.isPaused) return track;
+					return {
+						...track,
+						count:
+							Math.round((Date.now() - track.startedAt) / 1000) + track.count,
+					};
+				});
+			})
+			.addCase(fetchTracksAsync.rejected, (state, action) => {
+				state.isLoading = false;
+				state.error = action.payload;
+			}),
 });
 
 export const { addTrackLocal, removeTrackLocal, updateTrackLocal } =

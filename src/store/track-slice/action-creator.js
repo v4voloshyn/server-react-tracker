@@ -8,7 +8,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchTracksAsync = createAsyncThunk(
 	'trackSlice/fetch',
-	async () => {
+	async (_, { rejectWithValue }) => {
 		try {
 			const response = await fetch(
 				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks`
@@ -21,15 +21,14 @@ export const fetchTracksAsync = createAsyncThunk(
 
 			return data;
 		} catch (error) {
-			console.log(error.message);
-			console.log(error.stack);
+			rejectWithValue(error.message);
 		}
 	}
 );
 
 export const addTrackAsync = createAsyncThunk(
 	'trackSlice/add',
-	async (newTrack, { dispatch }) => {
+	async (newTrack, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await fetch(
 				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks`,
@@ -50,14 +49,14 @@ export const addTrackAsync = createAsyncThunk(
 			console.log(data);
 			dispatch(addTrackLocal(data));
 		} catch (error) {
-			console.log(error.message);
+			rejectWithValue(error.message);
 		}
 	}
 );
 
 export const removeTrackAsync = createAsyncThunk(
 	'trackSlice/remove',
-	async (id, { dispatch }) => {
+	async (id, { dispatch, rejectWithValue }) => {
 		try {
 			const response = await fetch(
 				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks/${id}`,
@@ -65,25 +64,25 @@ export const removeTrackAsync = createAsyncThunk(
 					method: 'DELETE',
 				}
 			);
-
+			console.log(response);
 			if (!response.ok) {
 				throw new Error('Something went wrong when fetching tracks');
 			}
 
 			dispatch(removeTrackLocal(id));
 		} catch (error) {
-			console.log(error.message);
+			rejectWithValue(error.message);
 		}
 	}
 );
 
 export const updateTrackAsync = createAsyncThunk(
 	'trackSlice/update',
-	async (newBody, { dispatch, getState }) => {
+	async (newBody, { dispatch, getState, rejectWithValue }) => {
 		const itemState = getState().track.tracks.find(
 			(track) => track.id === newBody.id
 		);
-		console.log(newBody.count);
+
 		if (
 			itemState.count === newBody.count &&
 			itemState.isPaused === newBody.isPaused
@@ -110,7 +109,7 @@ export const updateTrackAsync = createAsyncThunk(
 			const data = await response.json();
 			dispatch(updateTrackLocal(data));
 		} catch (error) {
-			console.log(error.message);
+			rejectWithValue(error.message);
 		}
 	}
 );
