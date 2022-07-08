@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 const TrackerList = () => {
 	const trackList = useSelector((state) => state.track.tracks);
-	// console.log(trackList);
 
 	return (
 		<Table>

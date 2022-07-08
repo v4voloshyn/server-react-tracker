@@ -22,6 +22,7 @@ export const useTimer = ({ timerName, count = 0, isPaused = true }) => {
 		return () => clearInterval(timeRef.current);
 	}, []);
 
+	// Usless feature Effect without handling
 	useEffect(() => {
 		localStorage.setItem(timerName, time);
 	}, [time, timerName]);
