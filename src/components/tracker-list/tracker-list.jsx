@@ -1,16 +1,12 @@
-import {
-	ButtonsContainer,
-	Colgroup,
-	TBody,
-	TRow,
-	Table,
-} from './tracker-list.style';
-import { MdDeleteOutline, MdPauseCircleOutline } from 'react-icons/md';
+import { Colgroup, TBody, TRow, Table } from './tracker-list.style';
 
 import ListItem from './list-item/list-item';
-import React from 'react';
+import { useSelector } from 'react-redux';
 
-const TrackerList = ({ trackList }) => {
+const TrackerList = () => {
+	const trackList = useSelector((state) => state.track.tracks);
+	console.log(trackList);
+
 	return (
 		<Table>
 			<Colgroup style={{ width: '200px' }}>
@@ -20,14 +16,19 @@ const TrackerList = ({ trackList }) => {
 				<col />
 			</Colgroup>
 			<thead>
-				<TRow>
+				<TRow style={{ backgroundColor: 'lightblue' }}>
 					<th></th>
 					<th>Track name</th>
 					<th>Counting</th>
 					<th></th>
 				</TRow>
 			</thead>
-			<TBody>{trackList && trackList.map((track) => <ListItem />)}</TBody>
+			<TBody>
+				{trackList &&
+					trackList.map((track, idx) => (
+						<ListItem key={track.id} idx={idx + 1} {...track} />
+					))}
+			</TBody>
 		</Table>
 	);
 };

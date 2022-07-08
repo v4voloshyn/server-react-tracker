@@ -19,13 +19,17 @@ export const TBody = styled.tbody`
 
 export const TRow = styled.tr`
 	display: grid;
+	padding: 0 10px;
+	margin-top: 4px;
 	height: 40px;
 	grid-template-columns: 30px 3fr 1fr 1fr;
 	align-items: center;
 	font-size: 18px;
-	background-color: rgba(30, 239, 44, 0.5);
+	background-color: ${({ isPause }) =>
+		isPause ? 'rgba(30, 239, 44, 0.5)' : 'lightyellow'};
 	border-top: 1px solid lightgray;
 	border-bottom: 1px solid lightgray;
+	border-radius: 10px;
 	& > th {
 		text-align: left;
 	}
