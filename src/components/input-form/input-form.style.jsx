@@ -1,4 +1,3 @@
-import { MdPlayCircle } from 'react-icons/md';
 import styled from 'styled-components';
 
 export const InputWrapper = styled.div`
@@ -20,16 +19,4 @@ export const Input = styled.input`
 	font-size: 16px;
 	border-radius: 30px;
 	border: 1px solid black;
-`;
-
-export const PlayIcon = styled(MdPlayCircle)`
-	position: absolute;
-	right: 0;
-	top: 50%;
-	transform: translateY(-50%);
-	cursor: pointer;
-	color: #9ff963;
-	& > :hover {
-		color: #39fb46;
-	}
 `;
