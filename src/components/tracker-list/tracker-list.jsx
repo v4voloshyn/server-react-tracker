@@ -1,10 +1,13 @@
 import { Colgroup, TBody, TRow, Table } from './tracker-list.style';
 
 import ListItem from './list-item/list-item';
+import Spinner from '../UI/Spinner/Spinner';
 import { useSelector } from 'react-redux';
 
 const TrackerList = () => {
-	const trackList = useSelector((state) => state.track.tracks);
+	const { tracks: trackList, isLoading } = useSelector((state) => state.track);
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<Table>
