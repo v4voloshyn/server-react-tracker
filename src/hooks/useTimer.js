@@ -23,9 +23,9 @@ export const useTimer = ({ timerName, count = 0, isPaused = true }) => {
 	}, []);
 
 	// Usless feature Effect without handling
-	useEffect(() => {
-		localStorage.setItem(timerName, time);
-	}, [time, timerName]);
+	// useEffect(() => {
+	// 	localStorage.setItem(timerName, time);
+	// }, [time, timerName]);
 
 	return {
 		time,
