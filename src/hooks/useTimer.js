@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useTimer = (timerName = Date.now()) => {
-	const getDefaultValue = (value) => localStorage.getItem(value);
-	const [time, setTime] = useState(Number(getDefaultValue(timerName) || 0));
-	const [isPause, setPause] = useState(true);
+export const useTimer = (timerName, count = 0, isPaused = true) => {
+	const [time, setTime] = useState(count);
+	const [isPause, setPause] = useState(isPaused);
 
 	const timeRef = useRef(null);
 
 	const start = () => {
-		if (timeRef.current && !isPause) return;
-
 		setPause(false);
 		timeRef.current = setInterval(() => {
 			setTime((prevCount) => prevCount + 1);
@@ -17,16 +14,13 @@ export const useTimer = (timerName = Date.now()) => {
 	};
 
 	const stop = () => {
-		if (isPause) {
-			setTime(0);
-		}
-		clearInterval(timeRef.current);
 		setPause(true);
+		clearInterval(timeRef.current);
 	};
 
-	useEffect(() => {
-		localStorage.setItem('timerName', timerName);
-	}, [time, timerName]);
+	// useEffect(() => {
+	// 	localStorage.setItem('timerName', timerName);
+	// }, [time, timerName]);
 
 	useEffect(() => {
 		return () => clearInterval(timeRef.current);
@@ -36,5 +30,6 @@ export const useTimer = (timerName = Date.now()) => {
 		time,
 		start,
 		stop,
+		isPause,
 	};
 };
