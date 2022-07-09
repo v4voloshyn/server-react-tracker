@@ -44,9 +44,10 @@ const InputForm = () => {
 					placeholder='Enter tracker name'
 					value={trackName}
 					onChange={handleInput}
+					disabled={addStatus}
 				/>
 				<Button disabled={addStatus} onClick={handleAddTrack}>
-					<MdPlayCircle />
+					<MdPlayCircle title='Add track' />
 				</Button>
 			</InputWrapper>
 		</>

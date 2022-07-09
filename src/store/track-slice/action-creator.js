@@ -113,3 +113,6 @@ export const updateTrackAsync = createAsyncThunk(
 		}
 	}
 );
+
+export const clearAllTrackAsync = () =>
+	createAsyncThunk('trackSlice/clearAll', async () => {});

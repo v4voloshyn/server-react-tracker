@@ -15,7 +15,7 @@ export const Title = styled.h1`
 export const Input = styled.input`
 	width: 100%;
 	padding: 15px;
-	padding-right: 35px;
+	padding-right: 55px;
 	font-size: 16px;
 	border-radius: 30px;
 	border: 1px solid black;

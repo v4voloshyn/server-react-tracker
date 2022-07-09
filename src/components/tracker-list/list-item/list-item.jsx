@@ -1,14 +1,15 @@
-import { ButtonsContainer, TRow } from '../tracker-list.style';
 import {
-	MdDeleteOutline,
-	MdPauseCircleOutline,
-	MdPlayCircleOutline,
-} from 'react-icons/md';
+	ButtonsContainer,
+	ClearIcon,
+	PauseIcon,
+	PlayIcon,
+} from './list-item-style';
 import {
 	removeTrackAsync,
 	updateTrackAsync,
 } from '../../../store/track-slice/action-creator';
 
+import { TRow } from '../tracker-list.style';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useTimer } from '../../../hooks/useTimer';
@@ -48,11 +49,11 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 			<td>
 				<ButtonsContainer>
 					{isPause ? (
-						<MdPlayCircleOutline onClick={toggleTrack} size={'2em'} />
+						<PlayIcon onClick={toggleTrack} size={'2em'} hover='true	' />
 					) : (
-						<MdPauseCircleOutline onClick={toggleTrack} size={'2em'} />
+						<PauseIcon onClick={toggleTrack} size={'2em'} />
 					)}
-					<MdDeleteOutline
+					<ClearIcon
 						size={'2em'}
 						onClick={() => dispatch(removeTrackAsync(id))}
 					/>

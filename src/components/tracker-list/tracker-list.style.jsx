@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 export const Table = styled.table`
+	max-height: 550px;
+	overflow-y: scroll;
 	margin-top: 20px;
 	max-width: 90vw;
 	width: 100%;
-	min-width: 300px;
+	min-width: 250px;
 `;
 
 export const TBody = styled.tbody`
@@ -23,6 +25,7 @@ export const TRow = styled.tr`
 	margin-top: 4px;
 	height: 40px;
 	grid-template-columns: 30px 3fr 1fr 1fr;
+	align-content: center;
 	align-items: center;
 	font-size: 18px;
 	transition: all 0.3s ease-in;
@@ -33,18 +36,19 @@ export const TRow = styled.tr`
 	border-radius: 10px;
 	& > th {
 		text-align: left;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		& > svg {
+			fill: tomato;
+			cursor: pointer;
+		}
 	}
 	@media screen and (max-width: 560px) {
-		grid-template-columns: 20px 3fr 1fr 1fr;
-	}
-`;
-
-export const ButtonsContainer = styled.span`
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	& > svg {
-		cursor: pointer;
+		grid-template-columns: 20px 1fr 50px 50px;
+		& > th {
+			font-size: 14px;
+		}
 	}
 `;
 

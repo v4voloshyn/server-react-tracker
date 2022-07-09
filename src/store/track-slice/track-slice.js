@@ -34,14 +34,18 @@ const trackSlice = createSlice({
 			})
 			.addCase(fetchTracksAsync.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.tracks = action.payload.map((track) => {
-					if (track.isPaused) return track;
-					return {
-						...track,
-						count:
-							Math.round((Date.now() - track.startedAt) / 1000) + track.count,
-					};
-				});
+				// map payload to check if track is still counting (not Paused) and set right count
+				// and reverse data for reversed view
+				state.tracks = action.payload
+					.map((track) => {
+						if (track.isPaused) return track;
+						return {
+							...track,
+							count:
+								Math.round((Date.now() - track.startedAt) / 1000) + track.count,
+						};
+					})
+					.reverse();
 			})
 			.addCase(fetchTracksAsync.rejected, (state, action) => {
 				state.isLoading = false;

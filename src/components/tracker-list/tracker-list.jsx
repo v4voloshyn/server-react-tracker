@@ -1,6 +1,7 @@
 import { Colgroup, TBody, TRow, Table } from './tracker-list.style';
 
 import ListItem from './list-item/list-item';
+import { MdDeleteOutline } from 'react-icons/md';
 import Spinner from '../UI/Spinner/Spinner';
 import { selectTrackSlice } from '../../store/track-slice/selectors';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,16 @@ const TrackerList = () => {
 
 	if (isLoading) return <Spinner />;
 	if (error) return <div>Wooopps, {error}</div>;
+
+	if (!trackList.length) return <h2>Start your first track</h2>;
+
+	const clearAllTracks = () => {
+		const areYouSure = window.confirm(
+			'Do you really want to clear all tracks?'
+		);
+
+		if (areYouSure) alert('Sorry, server does not support this function :(');
+	};
 
 	return (
 		<Table>
@@ -24,7 +35,13 @@ const TrackerList = () => {
 					<th></th>
 					<th>Track name</th>
 					<th>Time</th>
-					<th></th>
+					<th style={{ justifySelf: 'flex-end', marginRight: '10px' }}>
+						<MdDeleteOutline
+							size='1.5rem'
+							onClick={clearAllTracks}
+							title='Clear all tracks'
+						/>
+					</th>
 				</TRow>
 			</thead>
 			<TBody>
