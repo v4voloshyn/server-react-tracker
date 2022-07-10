@@ -27,6 +27,11 @@ export const TRow = styled.tr`
 		isPause ? 'rgba(30, 239, 44, 0.5)' : 'lightyellow'};
 	border: 1px solid lightgray;
 	border-radius: 10px;
+	& > td {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	}
 	& > th {
 		text-align: left;
 		height: 100%;
@@ -47,11 +52,6 @@ export const TRow = styled.tr`
 		padding: 0 5px;
 		& > th {
 			font-size: 14px;
-		}
-		& > td {
-			text-overflow: ellipsis;
-			overflow: hidden;
-			white-space: nowrap;
 		}
 	}
 `;
