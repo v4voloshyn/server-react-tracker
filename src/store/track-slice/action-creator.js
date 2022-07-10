@@ -46,7 +46,7 @@ export const addTrackAsync = createAsyncThunk(
 			}
 
 			const data = await response.json();
-			console.log(data);
+
 			dispatch(addTrackLocal(data));
 		} catch (error) {
 			rejectWithValue(error.message);
@@ -64,7 +64,7 @@ export const removeTrackAsync = createAsyncThunk(
 					method: 'DELETE',
 				}
 			);
-			console.log(response);
+
 			if (!response.ok) {
 				throw new Error('Something went wrong when fetching tracks');
 			}

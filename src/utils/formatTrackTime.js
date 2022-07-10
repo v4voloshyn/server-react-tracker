@@ -12,7 +12,5 @@ export const formatTrackTime = (countInSeconds) => {
 		s = '0' + s;
 	}
 
-	return `${h}:${m}:${s}`; // Return is HH : MM : SS
+	return `${h}:${m}:${s}`; // Return is HH:MM:SS
 };
-
-console.log(formatTrackTime(3725));
