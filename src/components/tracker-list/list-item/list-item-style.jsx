@@ -6,6 +6,24 @@ import {
 
 import styled from 'styled-components';
 
+export const CustomButton = styled.button`
+	display: flex;
+	align-items: center;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	&:disabled {
+		cursor: not-allowed;
+	}
+	& > svg {
+		transition: all 0.3s ease-in;
+		width: 100%;
+	}
+`;
+
 export const PlayIcon = styled(MdPlayCircleOutline)`
 	&:hover {
 		fill: #4ef34e;
@@ -16,16 +34,18 @@ export const PauseIcon = styled(MdPauseCircleOutline)`
 		fill: tomato;
 	}
 `;
+
 export const ClearIcon = styled(MdClear)`
 	&:hover {
 		fill: tomato;
 	}
 `;
 
-export const ButtonsContainer = styled.span`
+export const ButtonsContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	gap: 10px;
+
 	& > svg {
 		cursor: pointer;
 		transition: all 0.3s ease-in;

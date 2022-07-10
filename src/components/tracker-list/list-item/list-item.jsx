@@ -1,6 +1,7 @@
 import {
 	ButtonsContainer,
 	ClearIcon,
+	CustomButton,
 	PauseIcon,
 	PlayIcon,
 } from './list-item-style';
@@ -8,10 +9,11 @@ import {
 	removeTrackAsync,
 	updateTrackAsync,
 } from '../../../store/track-slice/action-creator';
+import { useEffect, useState } from 'react';
 
 import { TRow } from '../tracker-list.style';
+import { formatTrackTime } from '../../../utils/formatTrackTime';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useTimer } from '../../../hooks/useTimer';
 
 const ListItem = ({ id, name, idx, count, isPaused }) => {
@@ -20,6 +22,8 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 		count,
 		isPaused,
 	});
+
+	const [isDeleting, setIsDeleting] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -36,6 +40,13 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 		);
 	};
 
+	const deleteTrack = (trackId) => {
+		setIsDeleting(true);
+		Promise.resolve(dispatch(removeTrackAsync(trackId)))
+			.then(() => setIsDeleting(false))
+			.catch((e) => console.log(e));
+	};
+
 	useEffect(() => {
 		if (!isPause) start();
 		// eslint-disable-next-line
@@ -45,18 +56,19 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 		<TRow isPause={!isPause}>
 			<td>{idx}</td>
 			<td>{name}</td>
-			<td>{time}</td>
+			<td>{formatTrackTime(time)}</td>
 			<td>
 				<ButtonsContainer>
-					{isPause ? (
-						<PlayIcon onClick={toggleTrack} size={'2em'} hover='true	' />
-					) : (
-						<PauseIcon onClick={toggleTrack} size={'2em'} />
-					)}
-					<ClearIcon
-						size={'2em'}
-						onClick={() => dispatch(removeTrackAsync(id))}
-					/>
+					<CustomButton>
+						{isPause ? (
+							<PlayIcon onClick={toggleTrack} size={'2em'} hover='true	' />
+						) : (
+							<PauseIcon onClick={toggleTrack} size={'2em'} />
+						)}
+					</CustomButton>
+					<CustomButton disabled={isDeleting} onClick={() => deleteTrack(id)}>
+						<ClearIcon size={'2em'} />
+					</CustomButton>
 				</ButtonsContainer>
 			</td>
 		</TRow>
