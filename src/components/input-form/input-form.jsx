@@ -3,7 +3,7 @@ import { Input, InputWrapper, Title } from './input-form.style';
 import Button from '../UI/Button/Button';
 import { MdPlayCircle } from 'react-icons/md';
 import { addTrackAsync } from '../../store/track-slice/action-creator';
-import { formatTrackTimeToDay } from '../../utils/formatTrackTimeToDay';
+import { formatTrackName } from '../../utils/formatTrackName';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ const InputForm = () => {
 		new Promise((resolve) => {
 			const newTrack = {
 				id: nanoid(),
-				name: trackName || formatTrackTimeToDay(Date.now()),
+				name: trackName || formatTrackName(Date.now()),
 				startedAt: Date.now(),
 				isPaused: false,
 				count: 0,
