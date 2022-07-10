@@ -35,7 +35,7 @@ const TrackerList = () => {
 					<th></th>
 					<th>Track name</th>
 					<th>Time</th>
-					<th style={{ justifySelf: 'flex-end', marginRight: '10px' }}>
+					<th style={{ justifySelf: 'flex-end', marginRight: '15px' }}>
 						<MdDeleteOutline
 							size='1.5rem'
 							onClick={clearAllTracks}
