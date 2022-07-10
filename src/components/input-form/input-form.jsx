@@ -23,7 +23,7 @@ const InputForm = () => {
 		new Promise((resolve) => {
 			const newTrack = {
 				id: nanoid(),
-				name: trackName || formatTrackName(Date.now()),
+				name: trackName.trim() || formatTrackName(Date.now()),
 				startedAt: Date.now(),
 				isPaused: false,
 				count: 0,
@@ -42,7 +42,7 @@ const InputForm = () => {
 			<InputWrapper>
 				<Input
 					type='text'
-					placeholder='Enter tracker name'
+					placeholder='Enter track name'
 					value={trackName}
 					onChange={handleInput}
 					disabled={addStatus}

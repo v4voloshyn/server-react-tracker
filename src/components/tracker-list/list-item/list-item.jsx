@@ -61,12 +61,20 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 				<ButtonsContainer>
 					<CustomButton>
 						{isPause ? (
-							<PlayIcon onClick={toggleTrack} size={'2em'} hover='true	' />
+							<PlayIcon onClick={toggleTrack} size={'2em'} title='Play track' />
 						) : (
-							<PauseIcon onClick={toggleTrack} size={'2em'} />
+							<PauseIcon
+								onClick={toggleTrack}
+								size={'2em'}
+								title='Pause track'
+							/>
 						)}
 					</CustomButton>
-					<CustomButton disabled={isDeleting} onClick={() => deleteTrack(id)}>
+					<CustomButton
+						disabled={isDeleting}
+						onClick={() => deleteTrack(id)}
+						title='Delete track'
+					>
 						<ClearIcon size={'2em'} />
 					</CustomButton>
 				</ButtonsContainer>
