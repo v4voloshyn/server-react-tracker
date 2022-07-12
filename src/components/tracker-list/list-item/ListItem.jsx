@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { TRow } from '../TrackerList.style';
 import { formatTrackTime } from '../../../utils/formatTrackTime';
 import { useDispatch } from 'react-redux';
+import { useTheme } from '../../../hooks/useTheme';
 import { useTimer } from '../../../hooks/useTimer';
 
 const ListItem = ({ id, name, idx, count, isPaused }) => {
@@ -24,6 +25,8 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 	});
 
 	const [isDeleting, setIsDeleting] = useState(false);
+
+	const { theme } = useTheme();
 
 	const dispatch = useDispatch();
 
@@ -53,7 +56,7 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 	}, []);
 
 	return (
-		<TRow isPause={!isPause}>
+		<TRow isPause={isPause} theme={theme}>
 			<td>{idx}</td>
 			<td>{name}</td>
 			<td>{formatTrackTime(time)}</td>

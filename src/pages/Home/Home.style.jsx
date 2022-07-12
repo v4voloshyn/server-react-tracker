@@ -5,14 +5,16 @@ export const Container = styled.div`
 	width: 100vw;
 	margin: 0 auto;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
 `;
 
 export const FormWrapper = styled.div`
+	margin: auto;
 	display: flex;
+	justify-content: center;
 	width: 560px;
 	flex-direction: column;
+	flex: 1 1 auto;
 	align-items: center;
 	@media screen and (max-width: 560px) {
 		max-width: 90vw;

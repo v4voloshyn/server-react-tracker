@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+const handleThemeColor = (isPaused, theme) => {
+	switch (theme) {
+		case 'dark':
+			if (isPaused) return 'darkslategrey';
+			if (!isPaused) return 'rgba(30, 239, 44, 0.5)';
+			break;
+		case 'light':
+			if (!isPaused) return 'rgba(30, 239, 44, 0.5)';
+			if (isPaused) return 'lightyellow';
+			break;
+		default:
+			return 'inherit';
+	}
+};
+
 export const Table = styled.table`
 	margin-top: 20px;
 	width: 100%;
@@ -23,8 +38,7 @@ export const TRow = styled.tr`
 	align-items: center;
 	font-size: 14px;
 	transition: all 0.3s ease-in;
-	background-color: ${({ isPause }) =>
-		isPause ? 'rgba(30, 239, 44, 0.5)' : 'lightyellow'};
+	background-color: ${({ isPause, theme }) => handleThemeColor(isPause, theme)};
 	border: 1px solid lightgray;
 	border-radius: 10px;
 	& > td {

@@ -1,5 +1,3 @@
-import './App.scss';
-
 import Home from './pages/Home/Home';
 import { ThemeProvider } from './context/ThemeContext';
 
