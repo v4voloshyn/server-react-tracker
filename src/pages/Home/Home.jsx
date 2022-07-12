@@ -1,5 +1,6 @@
 import { Container, FormWrapper } from './Home.style';
 
+import Header from '../../components/header/Header';
 import InputForm from '../../components/input-form/InputForm';
 import TrackerList from '../../components/tracker-list/TrackerList';
 import { fetchTracksAsync } from '../../store/track-slice/action-creator';
@@ -15,6 +16,7 @@ const Home = () => {
 
 	return (
 		<Container>
+			<Header />
 			<FormWrapper>
 				<InputForm />
 				<TrackerList />
