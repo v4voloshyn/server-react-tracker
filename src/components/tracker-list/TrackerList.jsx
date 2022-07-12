@@ -1,6 +1,6 @@
-import { Colgroup, TBody, TRow, Table } from './tracker-list.style';
+import { Colgroup, TBody, TRow, Table } from './TrackerList.style';
 
-import ListItem from './list-item/list-item';
+import ListItem from './list-item/ListItem';
 import { MdDeleteOutline } from 'react-icons/md';
 import Spinner from '../UI/Spinner/Spinner';
 import { selectTrackSlice } from '../../store/track-slice/selectors';

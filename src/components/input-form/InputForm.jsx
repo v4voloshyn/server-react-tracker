@@ -1,4 +1,4 @@
-import { Input, InputWrapper, Title } from './input-form.style';
+import { Input, InputWrapper, Title } from './InputForm.style';
 
 import Button from '../UI/Button/Button';
 import { MdPlayCircle } from 'react-icons/md';

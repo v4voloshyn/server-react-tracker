@@ -4,14 +4,14 @@ import {
 	CustomButton,
 	PauseIcon,
 	PlayIcon,
-} from './list-item-style';
+} from './ListItem.style';
 import {
 	removeTrackAsync,
 	updateTrackAsync,
 } from '../../../store/track-slice/action-creator';
 import { useEffect, useState } from 'react';
 
-import { TRow } from '../tracker-list.style';
+import { TRow } from '../TrackerList.style';
 import { formatTrackTime } from '../../../utils/formatTrackTime';
 import { useDispatch } from 'react-redux';
 import { useTimer } from '../../../hooks/useTimer';
