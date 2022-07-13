@@ -58,7 +58,7 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 	return (
 		<TRow isPause={isPause} theme={theme}>
 			<td>{idx}</td>
-			<td>{name}</td>
+			<td title={name}>{name}</td>
 			<td>{formatTrackTime(time)}</td>
 			<td>
 				<ButtonsContainer>
