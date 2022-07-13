@@ -9,11 +9,6 @@ import { useSelector } from 'react-redux';
 const TrackerList = () => {
 	const { tracks: trackList, isLoading, error } = useSelector(selectTrackSlice);
 
-	if (isLoading) return <Spinner />;
-	if (error) return <div>Wooopps, {error}</div>;
-
-	if (!trackList.length) return <h2>Start your first track</h2>;
-
 	const clearAllTracks = () => {
 		const areYouSure = window.confirm(
 			'Do you really want to clear all tracks?'
@@ -21,6 +16,11 @@ const TrackerList = () => {
 
 		if (areYouSure) alert('Sorry, server does not support this function :(');
 	};
+
+	if (isLoading) return <Spinner />;
+	if (error) return <div>Wooopps, {error}</div>;
+
+	if (!trackList.length) return <h2>Start your first track</h2>;
 
 	return (
 		<Table>
