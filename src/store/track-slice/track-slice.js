@@ -1,5 +1,12 @@
+import {
+	addTrackAsync,
+	fetchTracksAsync,
+	removeTrackAsync,
+	updateTrackAsync,
+} from './action-creator';
+
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTracksAsync } from './action-creator';
+import { setErrorInSlice } from '../../utils/setErrorInSlice';
 
 const defaultState = {
 	tracks: [],
@@ -47,10 +54,10 @@ const trackSlice = createSlice({
 					})
 					.reverse();
 			})
-			.addCase(fetchTracksAsync.rejected, (state, action) => {
-				state.isLoading = false;
-				state.error = action.payload;
-			}),
+			.addCase(fetchTracksAsync.rejected, setErrorInSlice)
+			.addCase(addTrackAsync.rejected, setErrorInSlice)
+			.addCase(removeTrackAsync.rejected, setErrorInSlice)
+			.addCase(updateTrackAsync.rejected, setErrorInSlice),
 });
 
 export const { addTrackLocal, removeTrackLocal, updateTrackLocal } =

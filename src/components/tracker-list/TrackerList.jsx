@@ -18,39 +18,41 @@ const TrackerList = () => {
 	};
 
 	if (isLoading) return <Spinner />;
-	if (error) return <div>Wooopps, {error}</div>;
 
-	if (!trackList.length) return <h2>Start your first track</h2>;
+	if (!trackList.length && !error) return <h2>Start your first track</h2>;
 
 	return (
-		<Table>
-			<Colgroup style={{ width: '200px' }}>
-				<col />
-				<col />
-				<col />
-				<col />
-			</Colgroup>
-			<thead>
-				<TRow style={{ backgroundColor: 'lightblue' }}>
-					<th></th>
-					<th>Track name</th>
-					<th>Time</th>
-					<th style={{ justifySelf: 'flex-end', marginRight: '15px' }}>
-						<MdDeleteOutline
-							size='1.5rem'
-							onClick={clearAllTracks}
-							title='Clear all tracks'
-						/>
-					</th>
-				</TRow>
-			</thead>
-			<TBody>
-				{trackList &&
-					trackList.map((track, idx) => (
-						<ListItem key={track.id} idx={idx + 1} {...track} />
-					))}
-			</TBody>
-		</Table>
+		<>
+			{error && <div>Wooopps, {error}</div>}
+			<Table>
+				<Colgroup style={{ width: '200px' }}>
+					<col />
+					<col />
+					<col />
+					<col />
+				</Colgroup>
+				<thead>
+					<TRow style={{ backgroundColor: 'lightblue' }}>
+						<th></th>
+						<th>Track name</th>
+						<th>Time</th>
+						<th style={{ justifySelf: 'flex-end', marginRight: '15px' }}>
+							<MdDeleteOutline
+								size='1.5rem'
+								onClick={clearAllTracks}
+								title='Clear all tracks'
+							/>
+						</th>
+					</TRow>
+				</thead>
+				<TBody>
+					{trackList &&
+						trackList.map((track, idx) => (
+							<ListItem key={track.id} idx={idx + 1} {...track} />
+						))}
+				</TBody>
+			</Table>
+		</>
 	);
 };
 
