@@ -25,17 +25,20 @@ export const CustomButton = styled.button`
 `;
 
 export const PlayIcon = styled(MdPlayCircleOutline)`
+	color: black;
 	&:hover {
 		fill: #4ef34e;
 	}
 `;
 export const PauseIcon = styled(MdPauseCircleOutline)`
+	color: black;
 	&:hover {
 		fill: tomato;
 	}
 `;
 
 export const ClearIcon = styled(MdClear)`
+	color: black;
 	&:hover {
 		fill: tomato;
 	}
