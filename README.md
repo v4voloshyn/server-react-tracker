@@ -9,6 +9,6 @@ Yes, you can [touch it on GH-Pages](https://v4voloshyn.github.io/server-react-tr
 
 All tracks stored on server;
 Planend to do:
-- [ ] Dark theme and switcher
+- [x] Dark theme and switcher
 - [ ] Auth page to handle tracks for different users
 - [ ] Refactor some code :)
