@@ -62,7 +62,7 @@ export const TRow = styled.tr`
 		}
 	}
 	@media screen and (max-width: 560px) {
-		grid-template-columns: 20px 1fr 50px 60px;
+		grid-template-columns: 20px 1fr 60px 60px;
 		padding: 0 5px;
 		& > th {
 			font-size: 14px;
