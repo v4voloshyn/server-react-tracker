@@ -15,13 +15,12 @@ export const fetchTracksAsync = createAsyncThunk(
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong when fetching tracks');
+				throw new Error('Something went wrong during fetching tracks');
 			}
 			const data = await response.json();
-
 			return data;
 		} catch (error) {
-			rejectWithValue(error.message);
+			return rejectWithValue(error.message);
 		}
 	}
 );
@@ -42,14 +41,16 @@ export const addTrackAsync = createAsyncThunk(
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong when fetching tracks');
+				throw new Error(
+					'Track was not added! Try to reload page and try again'
+				);
 			}
 
 			const data = await response.json();
 
 			dispatch(addTrackLocal(data));
 		} catch (error) {
-			rejectWithValue(error.message);
+			return rejectWithValue(error.message);
 		}
 	}
 );
@@ -66,12 +67,12 @@ export const removeTrackAsync = createAsyncThunk(
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong when fetching tracks');
+				throw new Error('Track is not removed. Something went wrong...');
 			}
 
 			dispatch(removeTrackLocal(id));
 		} catch (error) {
-			rejectWithValue(error.message);
+			return rejectWithValue(error.message);
 		}
 	}
 );
@@ -103,13 +104,13 @@ export const updateTrackAsync = createAsyncThunk(
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong when fetching tracks');
+				throw new Error('Something went wrong when trying to update track');
 			}
 
 			const data = await response.json();
 			dispatch(updateTrackLocal(data));
 		} catch (error) {
-			rejectWithValue(error.message);
+			return rejectWithValue(error.message);
 		}
 	}
 );
