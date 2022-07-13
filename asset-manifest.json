@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/server-react-tracker/static/css/main.b7833f2d.css",
-    "main.js": "/server-react-tracker/static/js/main.8645df1b.js",
+    "main.js": "/server-react-tracker/static/js/main.035ffe90.js",
     "index.html": "/server-react-tracker/index.html",
     "main.b7833f2d.css.map": "/server-react-tracker/static/css/main.b7833f2d.css.map",
-    "main.8645df1b.js.map": "/server-react-tracker/static/js/main.8645df1b.js.map"
+    "main.035ffe90.js.map": "/server-react-tracker/static/js/main.035ffe90.js.map"
   },
   "entrypoints": [
     "static/css/main.b7833f2d.css",
-    "static/js/main.8645df1b.js"
+    "static/js/main.035ffe90.js"
   ]
 }
