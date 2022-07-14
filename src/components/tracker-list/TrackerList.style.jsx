@@ -20,6 +20,7 @@ export const Table = styled.table`
 	width: 100%;
 	min-width: 250px;
 `;
+Table.displayName = 'Table';
 
 export const TBody = styled.tbody`
 	@media screen and (max-width: 560px) {
@@ -28,6 +29,7 @@ export const TBody = styled.tbody`
 		}
 	}
 `;
+TBody.displayName = 'TBody';
 
 export const TRow = styled.tr`
 	display: grid;
@@ -69,8 +71,10 @@ export const TRow = styled.tr`
 		}
 	}
 `;
+TRow.displayName = 'TRow';
 
 export const Colgroup = styled.colgroup`
 	display: flex;
 	justify-content: space-between;
 `;
+Colgroup.displayName = 'ColGroup';

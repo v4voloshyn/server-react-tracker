@@ -8,3 +8,4 @@ export const HeaderContainer = styled.div`
 	align-items: center;
 	padding: 10px;
 `;
+HeaderContainer.displayName = 'HeaderContainer';

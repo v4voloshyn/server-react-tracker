@@ -7,6 +7,7 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+Container.displayName = 'Container';
 
 export const FormWrapper = styled.div`
 	margin: auto;
@@ -20,3 +21,4 @@ export const FormWrapper = styled.div`
 		max-width: 90vw;
 	}
 `;
+FormWrapper.displayName = 'FormWrapper';

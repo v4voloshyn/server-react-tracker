@@ -23,6 +23,7 @@ export const CustomButton = styled.button`
 		width: 100%;
 	}
 `;
+CustomButton.displayName = 'CustomButton';
 
 export const PlayIcon = styled(MdPlayCircleOutline)`
 	color: black;
@@ -30,12 +31,15 @@ export const PlayIcon = styled(MdPlayCircleOutline)`
 		fill: #4ef34e;
 	}
 `;
+PlayIcon.displayName = 'PlayIcon';
+
 export const PauseIcon = styled(MdPauseCircleOutline)`
 	color: black;
 	&:hover {
 		fill: tomato;
 	}
 `;
+PauseIcon.displayName = 'PauseIcon';
 
 export const ClearIcon = styled(MdClear)`
 	color: black;
@@ -43,6 +47,7 @@ export const ClearIcon = styled(MdClear)`
 		fill: tomato;
 	}
 `;
+ClearIcon.displayName = 'ClearIcon';
 
 export const ButtonsContainer = styled.div`
 	display: flex;
@@ -58,3 +63,4 @@ export const ButtonsContainer = styled.div`
 		gap: 3px;
 	}
 `;
+ButtonsContainer.displayName = 'ButtonsContainer';
