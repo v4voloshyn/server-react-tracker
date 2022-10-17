@@ -2,8 +2,11 @@
   "name": "react-tracker-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "./backend/index.js",
+  "type": "module",
+  "main": "backend/index.js",
   "scripts": {
+    "dev": "node backend/index.js",
+    "server": "nodemon backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +21,12 @@
   },
   "homepage": "https://github.com/v4voloshyn/server-react-tracker#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
   },
   "devDependencies": {
+    "colors": "^1.4.0",
     "concurrently": "^7.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
