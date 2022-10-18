@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan'
 import colors from 'colors';
 import {connectToMongoDB} from './config/mongoConnection.js'
+import { trackRouter } from './router/trackRouter.js';
 dotenv.config();
 
 connectToMongoDB();
@@ -13,9 +14,7 @@ if(process.env.NODE_ENV === 'development'){
 }
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-	res.send('this is homepage')
-})
+app.use('/api/v1/tracks', trackRouter)
 
 if(process.env.NODE_ENV === 'production') {
    app.use(express.static('client/build'));
