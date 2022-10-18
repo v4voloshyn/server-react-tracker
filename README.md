@@ -9,10 +9,12 @@
 - Node.js, Express.js;
   <hr/>
 ### BACKEND TODO:
-- [ ] Connect to MongoDB;
-- [ ] Timer model;
-- [ ] Timer router;
-- [ ] Timer controller;
-- - [ ] getTimers;
-- - [ ] setStart;
-- - [ ] setPause;
+- [x] Connect to MongoDB;
+- [x] Track model;
+- [x] Track router;
+- [x] Track controller;
+- - [x] Get all tracks;
+- - [x] Create new Track;
+- - [x] Change Track status;
+- - [x] Delete Track;
+- - [x] Delete all Tracks;
