@@ -5,7 +5,7 @@
   "type": "module",
   "main": "backend/index.js",
   "scripts": {
-    "dev": "node backend/index.js",
+    "start": "node backend/index.js",
     "server": "nodemon backend/index.js",
     "app": "concurrently \"npm run server\" \"npm start --prefix client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
