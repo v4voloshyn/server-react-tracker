@@ -1,7 +1,8 @@
 export const formatTrackTime = (countInSeconds) => {
-	let h = Math.floor(countInSeconds / 3600);
-	let m = Math.floor((countInSeconds / 60) % 60);
-	let s = countInSeconds - h * 3600 - m * 60;
+	const seconds = Math.round(countInSeconds);
+	let h = Math.floor(seconds / 3600);
+	let m = Math.floor((seconds / 60) % 60);
+	let s = seconds - h * 3600 - m * 60;
 	if (h < 10) {
 		h = '0' + h;
 	}
