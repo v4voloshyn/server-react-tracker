@@ -6,6 +6,7 @@
   "main": "backend/index.js",
   "scripts": {
     "dev": "node backend/index.js",
+    "app": "concurrently \"npm run server\" \"npm start --prefix client\"",
     "server": "nodemon backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/v4voloshyn/server-react-tracker#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
