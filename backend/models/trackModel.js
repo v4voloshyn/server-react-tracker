@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const trackSchema = mongoose.Schema({
 	title: {
 		type: String,
+		trim: true,
 		required: [true, 'Please enter a name of track']
 	},
 	secondsCount: {

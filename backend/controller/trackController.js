@@ -30,7 +30,7 @@ export const deleteTrack = asyncHandler(async (req, res) => {
 			msg: 'Wrong trackID or it was removed already',
 		});
 	}
-	res.status(201).json({
+	res.status(200).json({
 		success: true,
 		msg: 'Track successful was removed',
 		track,
