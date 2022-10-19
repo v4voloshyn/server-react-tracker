@@ -4,17 +4,22 @@ import ListItem from './list-item/ListItem';
 import { MdDeleteOutline } from 'react-icons/md';
 import Spinner from '../UI/Spinner/Spinner';
 import { selectTrackSlice } from '../../store/track-slice/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAllTracksAsync } from '../../store/track-slice/action-creator';
 
 const TrackerList = () => {
 	const { tracks: trackList, isLoading, error } = useSelector(selectTrackSlice);
+
+	const dispatch = useDispatch();
 
 	const clearAllTracks = () => {
 		const areYouSure = window.confirm(
 			'Do you really want to clear all tracks?'
 		);
 
-		if (areYouSure) alert('Sorry, server does not support this function :(');
+		if (areYouSure) {
+			dispatch(clearAllTracksAsync());
+		}
 	};
 
 	if (isLoading) return <Spinner />;
@@ -46,10 +51,9 @@ const TrackerList = () => {
 					</TRow>
 				</thead>
 				<TBody>
-					{trackList &&
-						trackList.map((track, idx) => (
-							<ListItem key={track.id} idx={idx + 1} {...track} />
-						))}
+					{trackList.map((track, idx) => (
+						<ListItem key={track._id} idx={idx + 1} {...track} />
+					))}
 				</TBody>
 			</Table>
 		</>

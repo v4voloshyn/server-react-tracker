@@ -17,10 +17,9 @@ import { formatTrackTime } from '../../../utils/formatTrackTime';
 import { useTheme } from '../../../hooks/useTheme';
 import { useTimer } from '../../../hooks/useTimer';
 
-const ListItem = ({ id, name, idx, count, isPaused }) => {
+const ListItem = ({ _id, title, idx, secondsCount, isPaused }) => {
 	const { isPause, time, start, stop } = useTimer({
-		timerName: name,
-		count,
+		secondsCount,
 		isPaused,
 	});
 
@@ -33,18 +32,12 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 	const toggleTrack = () => {
 		isPause ? start() : stop();
 
-		dispatch(
-			updateTrackAsync({
-				id,
-				count: time,
-				isPaused: !isPause,
-				startedAt: Date.now(),
-			})
-		);
+		dispatch(updateTrackAsync(_id));
 	};
 
 	const deleteTrack = (trackId) => {
 		setIsDeleting(true);
+
 		Promise.resolve(dispatch(removeTrackAsync(trackId)))
 			.then(() => setIsDeleting(false))
 			.catch((e) => console.log(e));
@@ -52,13 +45,12 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 
 	useEffect(() => {
 		if (!isPause) start();
-		// eslint-disable-next-line
-	}, []);
+	}, [start, isPause]);
 
 	return (
 		<TRow isPause={isPause} theme={theme}>
 			<td>{idx}</td>
-			<td title={name}>{name}</td>
+			<td title={title}>{title}</td>
 			<td>{formatTrackTime(time)}</td>
 			<td>
 				<ButtonsContainer>
@@ -75,7 +67,7 @@ const ListItem = ({ id, name, idx, count, isPaused }) => {
 					</CustomButton>
 					<CustomButton
 						disabled={isDeleting}
-						onClick={() => deleteTrack(id)}
+						onClick={() => deleteTrack(_id)}
 						title='Delete track'
 					>
 						<ClearIcon size={'2em'} />
