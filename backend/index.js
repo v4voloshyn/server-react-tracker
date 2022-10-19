@@ -3,11 +3,13 @@ import dotenv from 'dotenv';
 import morgan from 'morgan'
 import cors from 'cors';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import {connectToMongoDB} from './config/mongoConnection.js'
 import { trackRouter } from './router/trackRouter.js';
 dotenv.config();
 
 connectToMongoDB();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 if(process.env.NODE_ENV !== 'production'){
