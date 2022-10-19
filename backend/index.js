@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan'
 import cors from 'cors';
+import path from 'path';
 import {connectToMongoDB} from './config/mongoConnection.js'
 import { trackRouter } from './router/trackRouter.js';
 dotenv.config();
