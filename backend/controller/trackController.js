@@ -9,7 +9,7 @@ export const getTracks = asyncHandler(async (req, res) => {
 	res.status(200).json(allTracks);
 });
 
-// @desc START/Create new track
+// @desc Start/Create new track
 // @route POST /api/v1/tracks
 // @acces Public
 export const createNewTrack = asyncHandler(async (req, res) => {
@@ -27,12 +27,12 @@ export const deleteTrack = asyncHandler(async (req, res) => {
 	if (!track) {
 		return res.status(404).json({
 			success: false,
-			msg: 'Wrong trackID or it is removed already',
+			msg: 'Wrong trackID or it was removed already',
 		});
 	}
 	res.status(201).json({
 		success: true,
-		msg: 'Track successfull was removed',
+		msg: 'Track successful was removed',
 		track,
 	});
 });
@@ -44,7 +44,7 @@ export const deleteALLTracks = asyncHandler(async (req, res) => {
 	await TrackModel.deleteMany({});
 	res.status(200).json({
 		success: true,
-		msg: 'ALL tracks was deleted',
+		msg: 'All tracks have been deleted',
 	});
 });
 
@@ -73,14 +73,14 @@ export const changeTrackStatus = asyncHandler(async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			msg: 'Unpause track',
-			updatedTrack,
+			track: updatedTrack,
 		});
 	} else {
 		const updatedTrack = await TrackModel.findByIdAndUpdate(
 			trackID,
 			{
 				isPaused: true,
-				secondsCount: track.secondsCount + (Date.now() - new Date(track['updatedAt'])) / 1000,
+				secondsCount: track.secondsCount + (Date.now() - new Date(track.updatedAt)) / 1000,
 			},
 			{
 				new: true,
@@ -89,7 +89,7 @@ export const changeTrackStatus = asyncHandler(async (req, res) => {
 		return res.status(200).json({
 			success: true,
 			msg: 'Track was paused',
-			updatedTrack,
+			track: updatedTrack,
 		});
 	}
 });
