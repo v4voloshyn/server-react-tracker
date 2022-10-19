@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 export const useTimer = ({ secondsCount = 0, isPaused = true }) => {
 	const [time, setTime] = useState(secondsCount);
@@ -6,17 +6,17 @@ export const useTimer = ({ secondsCount = 0, isPaused = true }) => {
 
 	const timeRef = useRef(null);
 
-	const start = () => {
+	const start = useCallback(() => {
 		setPause(false);
 		timeRef.current = setInterval(() => {
 			setTime((prevCount) => prevCount + 1);
 		}, 1000);
-	};
+	}, []);
 
-	const stop = () => {
+	const stop = useCallback(() => {
 		setPause(true);
 		clearInterval(timeRef.current);
-	};
+	}, []);
 
 	useEffect(() => {
 		return () => clearInterval(timeRef.current);
