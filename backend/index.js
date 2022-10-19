@@ -2,7 +2,6 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan'
 import cors from 'cors';
-import colors from 'colors';
 import {connectToMongoDB} from './config/mongoConnection.js'
 import { trackRouter } from './router/trackRouter.js';
 dotenv.config();
@@ -30,4 +29,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} Mode on ${PORT} Port`.cyan.bold))
+app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} Mode on ${PORT} Port`))
