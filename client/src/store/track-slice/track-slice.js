@@ -1,5 +1,6 @@
 import {
 	addTrackAsync,
+	clearAllTracksAsync,
 	fetchTracksAsync,
 	removeTrackAsync,
 	updateTrackAsync,
@@ -19,19 +20,26 @@ const trackSlice = createSlice({
 	initialState: defaultState,
 	reducers: {
 		addTrackLocal(state, action) {
+			state.error = '';
 			state.tracks = [action.payload, ...state.tracks];
 		},
 		removeTrackLocal(state, action) {
+			state.error = '';
 			state.tracks = state.tracks.filter(
-				(track) => track.id !== action.payload
+				(track) => track._id !== action.payload
 			);
 		},
 		updateTrackLocal(state, action) {
+			state.error = '';
 			state.tracks = state.tracks.map((track) => {
 				const { id, ...rest } = action.payload;
-				if (track.id !== id) return track;
+				if (track._id !== id) return track;
 				return { ...track, ...rest };
 			});
+		},
+		clearAllTracksLocal(state) {
+			state.error = '';
+			state.tracks = [];
 		},
 	},
 	extraReducers: (builder) =>
@@ -48,8 +56,9 @@ const trackSlice = createSlice({
 						if (track.isPaused) return track;
 						return {
 							...track,
-							count:
-								Math.round((Date.now() - track.startedAt) / 1000) + track.count,
+							secondsCount:
+								Math.round((Date.now() - new Date(track.updatedAt)) / 1000) +
+								track.secondsCount,
 						};
 					})
 					.reverse();
@@ -57,10 +66,15 @@ const trackSlice = createSlice({
 			.addCase(fetchTracksAsync.rejected, setErrorInSlice)
 			.addCase(addTrackAsync.rejected, setErrorInSlice)
 			.addCase(removeTrackAsync.rejected, setErrorInSlice)
-			.addCase(updateTrackAsync.rejected, setErrorInSlice),
+			.addCase(updateTrackAsync.rejected, setErrorInSlice)
+			.addCase(clearAllTracksAsync.rejected, setErrorInSlice),
 });
 
-export const { addTrackLocal, removeTrackLocal, updateTrackLocal } =
-	trackSlice.actions;
+export const {
+	addTrackLocal,
+	removeTrackLocal,
+	updateTrackLocal,
+	clearAllTracksLocal,
+} = trackSlice.actions;
 
 export default trackSlice.reducer;

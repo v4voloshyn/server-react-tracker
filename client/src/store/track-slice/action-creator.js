@@ -1,22 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { api } from '../../api/_api';
 import {
 	addTrackLocal,
+	clearAllTracksLocal,
 	removeTrackLocal,
 	updateTrackLocal,
 } from './track-slice';
 
 export const fetchTracksAsync = createAsyncThunk(
-	'trackSlice/fetch',
+	'trackSlice/getAll',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await fetch(
-				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks`
-			);
+			const response = await api.get('/tracks');
 
-			if (!response.ok) {
+			if (response.statusText !== 'OK') {
 				throw new Error('Something went wrong during fetching tracks');
 			}
-			const data = await response.json();
+			const { data } = response;
 			return data;
 		} catch (error) {
 			return rejectWithValue(error.message);
@@ -25,27 +25,17 @@ export const fetchTracksAsync = createAsyncThunk(
 );
 
 export const addTrackAsync = createAsyncThunk(
-	'trackSlice/add',
+	'trackSlice/addOne',
 	async (newTrack, { dispatch, rejectWithValue }) => {
 		try {
-			const response = await fetch(
-				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(newTrack),
-				}
-			);
+			const response = await api.post(`/tracks`, newTrack);
 
-			if (!response.ok) {
+			if (response.statusText !== 'Created') {
 				throw new Error(
 					'Track was not added! Try to reload page and try again'
 				);
 			}
-
-			const data = await response.json();
+			const { data } = response;
 
 			dispatch(addTrackLocal(data));
 		} catch (error) {
@@ -55,17 +45,12 @@ export const addTrackAsync = createAsyncThunk(
 );
 
 export const removeTrackAsync = createAsyncThunk(
-	'trackSlice/remove',
+	'trackSlice/removeOne',
 	async (id, { dispatch, rejectWithValue }) => {
 		try {
-			const response = await fetch(
-				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks/${id}`,
-				{
-					method: 'DELETE',
-				}
-			);
+			const response = await api.delete(`/tracks/${id}`);
 
-			if (!response.ok) {
+			if (response.statusText !== 'OK') {
 				throw new Error('Track is not removed. Something went wrong...');
 			}
 
@@ -77,36 +62,16 @@ export const removeTrackAsync = createAsyncThunk(
 );
 
 export const updateTrackAsync = createAsyncThunk(
-	'trackSlice/update',
-	async (newBody, { dispatch, getState, rejectWithValue }) => {
-		const itemState = getState().track.tracks.find(
-			(track) => track.id === newBody.id
-		);
-
-		if (
-			itemState.count === newBody.count &&
-			itemState.isPaused === newBody.isPaused
-		)
-			return;
-
-		const { id, ...rest } = newBody;
+	'trackSlice/updateOne',
+	async (_id, { dispatch, rejectWithValue }) => {
 		try {
-			const response = await fetch(
-				`https://62c712372b03e73a58ded305.mockapi.io/api/v1/tracks/${id}`,
-				{
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(rest),
-				}
-			);
+			const response = await api.put(`/tracks/${_id}`);
 
-			if (!response.ok) {
+			if (response.statusText !== 'OK') {
 				throw new Error('Something went wrong when trying to update track');
 			}
+			const { data } = response;
 
-			const data = await response.json();
 			dispatch(updateTrackLocal(data));
 		} catch (error) {
 			return rejectWithValue(error.message);
@@ -114,5 +79,19 @@ export const updateTrackAsync = createAsyncThunk(
 	}
 );
 
-export const clearAllTrackAsync = () =>
-	createAsyncThunk('trackSlice/clearAll', async () => {});
+export const clearAllTracksAsync = createAsyncThunk(
+	'trackSlice/removeAll',
+	async (_id, { dispatch, rejectWithValue }) => {
+		try {
+			const response = await api.delete('/tracks');
+
+			if (response.statusText !== 'OK') {
+				throw new Error('Something went wrong on deleting tracks collection');
+			}
+
+			dispatch(clearAllTracksLocal());
+		} catch (error) {
+			return rejectWithValue(error.message);
+		}
+	}
+);
