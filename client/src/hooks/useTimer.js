@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useTimer = ({ timerName, count = 0, isPaused = true }) => {
-	const [time, setTime] = useState(count);
+export const useTimer = ({ secondsCount = 0, isPaused = true }) => {
+	const [time, setTime] = useState(secondsCount);
 	const [isPause, setPause] = useState(isPaused);
 
 	const timeRef = useRef(null);
@@ -21,11 +21,6 @@ export const useTimer = ({ timerName, count = 0, isPaused = true }) => {
 	useEffect(() => {
 		return () => clearInterval(timeRef.current);
 	}, []);
-
-	// Usless feature Effect without handling
-	// useEffect(() => {
-	// 	localStorage.setItem(timerName, time);
-	// }, [time, timerName]);
 
 	return {
 		time,
