@@ -31,7 +31,6 @@ if (process.env.NODE_ENV === 'production') {
 } else {
 	app.get('/', (req, res) => res.send('Please switch to production mode'));
 }
-console.log('Port, ', PORT);
 app.listen(PORT, () =>
-	console.log(`Server running in ${process.env.NODE_ENV} Mode on ${process.env.PORT} Port`)
+	console.log(`Server running in ${process.env.NODE_ENV} Mode on ${PORT} Port`)
 );

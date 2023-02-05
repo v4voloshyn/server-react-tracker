@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { api } from '../../api/_api';
 import {
 	addTrackLocal,
@@ -12,9 +11,9 @@ export const fetchTracksAsync = createAsyncThunk(
 	'trackSlice/getAll',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await axios.get('api/v1/tracks');
+			const response = await api.get('/tracks');
 
-			if (response.statusText !== 'OK') {
+			if (response.status !== 200) {
 				throw new Error('Something went wrong during fetching tracks');
 			}
 			const { data } = response;
@@ -31,7 +30,7 @@ export const addTrackAsync = createAsyncThunk(
 		try {
 			const response = await api.post(`/tracks`, newTrack);
 
-			if (response.statusText !== 'Created') {
+			if (response.status !== 201) {
 				throw new Error('Track was not added! Try to reload page and try again');
 			}
 			const { data } = response;
@@ -49,7 +48,7 @@ export const removeTrackAsync = createAsyncThunk(
 		try {
 			const response = await api.delete(`/tracks/${id}`);
 
-			if (response.statusText !== 'OK') {
+			if (response.status !== 200) {
 				throw new Error('Track is not removed. Something went wrong...');
 			}
 
@@ -66,7 +65,7 @@ export const updateTrackAsync = createAsyncThunk(
 		try {
 			const response = await api.put(`/tracks/${_id}`);
 
-			if (response.statusText !== 'OK') {
+			if (response.status !== 200) {
 				throw new Error('Something went wrong when trying to update track');
 			}
 			const { data } = response;
@@ -84,7 +83,7 @@ export const clearAllTracksAsync = createAsyncThunk(
 		try {
 			const response = await api.delete('/tracks');
 
-			if (response.statusText !== 'OK') {
+			if (response.status !== 200) {
 				throw new Error('Something went wrong on deleting tracks collection');
 			}
 
