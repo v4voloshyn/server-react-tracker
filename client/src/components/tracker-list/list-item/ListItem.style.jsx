@@ -1,8 +1,4 @@
-import {
-	MdClear,
-	MdPauseCircleOutline,
-	MdPlayCircleOutline,
-} from 'react-icons/md';
+import { MdClear, MdPauseCircleOutline, MdPlayCircleOutline } from 'react-icons/md';
 
 import styled from 'styled-components';
 

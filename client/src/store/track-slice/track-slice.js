@@ -25,9 +25,7 @@ const trackSlice = createSlice({
 		},
 		removeTrackLocal(state, action) {
 			state.error = '';
-			state.tracks = state.tracks.filter(
-				(track) => track._id !== action.payload
-			);
+			state.tracks = state.tracks.filter((track) => track._id !== action.payload);
 		},
 		updateTrackLocal(state, action) {
 			state.error = '';
@@ -57,8 +55,7 @@ const trackSlice = createSlice({
 						return {
 							...track,
 							secondsCount:
-								Math.round((Date.now() - new Date(track.updatedAt)) / 1000) +
-								track.secondsCount,
+								Math.round((Date.now() - new Date(track.updatedAt)) / 1000) + track.secondsCount,
 						};
 					})
 					.reverse();
@@ -70,11 +67,7 @@ const trackSlice = createSlice({
 			.addCase(clearAllTracksAsync.rejected, setErrorInSlice),
 });
 
-export const {
-	addTrackLocal,
-	removeTrackLocal,
-	updateTrackLocal,
-	clearAllTracksLocal,
-} = trackSlice.actions;
+export const { addTrackLocal, removeTrackLocal, updateTrackLocal, clearAllTracksLocal } =
+	trackSlice.actions;
 
 export default trackSlice.reducer;

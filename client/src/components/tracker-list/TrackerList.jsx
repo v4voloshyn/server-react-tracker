@@ -13,9 +13,7 @@ const TrackerList = () => {
 	const dispatch = useDispatch();
 
 	const clearAllTracks = () => {
-		const areYouSure = window.confirm(
-			'Do you really want to clear all tracks?'
-		);
+		const areYouSure = window.confirm('Do you really want to clear all tracks?');
 
 		if (areYouSure) {
 			dispatch(clearAllTracksAsync());
@@ -42,11 +40,7 @@ const TrackerList = () => {
 						<th>Track name</th>
 						<th>Time</th>
 						<th style={{ justifySelf: 'flex-end', marginRight: '15px' }}>
-							<MdDeleteOutline
-								size='1.5rem'
-								onClick={clearAllTracks}
-								title='Clear all tracks'
-							/>
+							<MdDeleteOutline size='1.5rem' onClick={clearAllTracks} title='Clear all tracks' />
 						</th>
 					</TRow>
 				</thead>

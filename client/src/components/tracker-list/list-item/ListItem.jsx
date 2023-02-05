@@ -1,16 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-	ButtonsContainer,
-	ClearIcon,
-	CustomButton,
-	PauseIcon,
-	PlayIcon,
-} from './ListItem.style';
-import {
-	removeTrackAsync,
-	updateTrackAsync,
-} from '../../../store/track-slice/action-creator';
+import { ButtonsContainer, ClearIcon, CustomButton, PauseIcon, PlayIcon } from './ListItem.style';
+import { removeTrackAsync, updateTrackAsync } from '../../../store/track-slice/action-creator';
 
 import { TRow } from '../TrackerList.style';
 import { formatTrackTime } from '../../../utils/formatTrackTime';
@@ -58,18 +49,10 @@ const ListItem = ({ _id, title, idx, secondsCount, isPaused }) => {
 						{isPause ? (
 							<PlayIcon onClick={toggleTrack} size={'2em'} title='Play track' />
 						) : (
-							<PauseIcon
-								onClick={toggleTrack}
-								size={'2em'}
-								title='Pause track'
-							/>
+							<PauseIcon onClick={toggleTrack} size={'2em'} title='Pause track' />
 						)}
 					</CustomButton>
-					<CustomButton
-						disabled={isDeleting}
-						onClick={() => deleteTrack(_id)}
-						title='Delete track'
-					>
+					<CustomButton disabled={isDeleting} onClick={() => deleteTrack(_id)} title='Delete track'>
 						<ClearIcon size={'2em'} />
 					</CustomButton>
 				</ButtonsContainer>

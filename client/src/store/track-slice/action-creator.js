@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { api } from '../../api/_api';
 import {
 	addTrackLocal,
@@ -11,7 +12,7 @@ export const fetchTracksAsync = createAsyncThunk(
 	'trackSlice/getAll',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await api.get('/tracks');
+			const response = await axios.get('api/v1/tracks');
 
 			if (response.statusText !== 'OK') {
 				throw new Error('Something went wrong during fetching tracks');
@@ -31,9 +32,7 @@ export const addTrackAsync = createAsyncThunk(
 			const response = await api.post(`/tracks`, newTrack);
 
 			if (response.statusText !== 'Created') {
-				throw new Error(
-					'Track was not added! Try to reload page and try again'
-				);
+				throw new Error('Track was not added! Try to reload page and try again');
 			}
 			const { data } = response;
 

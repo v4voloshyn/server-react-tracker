@@ -20,7 +20,5 @@ export const ThemeProvider = ({ children }) => {
 		setTheme(getLSTheme || 'dark');
 	}, []);
 
-	return (
-		<ThemeContext.Provider value={themeStore}>{children}</ThemeContext.Provider>
-	);
+	return <ThemeContext.Provider value={themeStore}>{children}</ThemeContext.Provider>;
 };
