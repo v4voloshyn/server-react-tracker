@@ -1,5 +1,5 @@
 # Simple Timer-Tracker with backend part on Node.js & Express.js
-### You can view it on heroku: [**Click**](https://react-server-tracker.herokuapp.com/)
+### You can view it on heroku: [**Click**](https://timetracker-cb4a.onrender.com/)
 ![alt text](https://github.com/v4voloshyn/server-react-tracker/blob/main/preview/tracker.png?raw=true)
 ### Made with :
 - React.js
